@@ -3,171 +3,222 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Funky Computer Classes</title>
+  <meta name="description" content="Welcome to Computer Learning Class – your trusted destination for high-quality computer education. Courses include DIT, DCA, DMA, ADCA, and DWD, designed to help students gain practical IT skills." />
+  <meta name="keywords" content="computer courses, DIT, DCA, DMA, ADCA, DWD, IT education, online learning, Computer Learning Class" />
+  <meta name="author" content="Computer Learning Class" />
+  <title>Computer Learning Class</title>
+  <link rel="icon" type="image/jpg" href="favicon.jpg" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
-      color: #39ff14;
-      overflow-x: hidden;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000;
     }
-
     header {
-      text-align: center;
-      padding: 3rem 1rem;
-      font-size: 2.5rem;
-      font-weight: bold;
-      text-shadow: 0 0 20px #39ff14;
-      animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
-      }
-      to {
-        text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
-      }
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
-      text-align: center;
-      animation: slideIn 1.5s ease-out;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .description {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-      color: #ffffff;
-      text-shadow: 0 0 10px #00ffff;
-    }
-
-    .buttons {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 3rem;
+      justify-content: space-between;
+      align-items: center;
     }
-
-    .buttons a {
-      text-decoration: none;
-      color: black;
-      background-color: #39ff14;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      box-shadow: 0 0 20px #39ff14;
-      transition: all 0.3s ease;
-      animation: bounce 1s infinite alternate;
+    header h1 {
+      margin: 0;
+      font-size: 28px;
     }
-
-    .buttons a:hover {
-      background-color: #00ffff;
-      box-shadow: 0 0 30px #00ffff;
-    }
-
-    @keyframes bounce {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .content-section {
-      margin-top: 2rem;
-    }
-
-    .content-section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #ff00ff;
-      text-shadow: 0 0 10px #ff00ff;
-    }
-
-    .video-container iframe {
-      width: 100%;
-      max-width: 100%;
-      height: 300px;
+    .search-bar input {
+      padding: 7px;
       border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #ff00ff;
-      animation: fadeIn 2s ease;
+      border-radius: 4px;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    nav {
+      background-color: #002244;
+      padding: 10px 20px;
+      text-align: center;
     }
-
-    @media (max-width: 600px) {
-      header {
-        font-size: 1.8rem;
-      }
-
-      .buttons a {
-        width: 100%;
-        text-align: center;
-      }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      padding: 20px;
+    }
+    .course {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+    }
+    .course img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+    .course-title {
+      font-size: 20px;
+      color: #003366;
+      margin-top: 0;
+    }
+    .price {
+      color: green;
+      font-weight: bold;
+    }
+    .description {
+      display: none;
+      margin-top: 10px;
+    }
+    .buttons {
+      margin-top: 10px;
+    }
+    .buttons button {
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .buttons button:hover {
+      background-color: #001a33;
+    }
+    footer {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    .footer-buttons a {
+      background-color: #004080;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      margin: 10px;
+      display: inline-block;
+      border-radius: 5px;
     }
   </style>
+  <script>
+    function toggleDescription(id) {
+      const desc = document.getElementById('desc-' + id);
+      const btn = document.getElementById('btn-' + id);
+      if (desc.style.display === 'none') {
+        desc.style.display = 'block';
+        btn.innerText = 'Show Less';
+      } else {
+        desc.style.display = 'none';
+        btn.innerText = 'Show More';
+      }
+    }
+  </script>
 </head>
 <body>
-  <header>💻 computer learning classes  💻</header>
+
+  <header>
+    <h1>Computer Learning Class</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Search courses..." />
+    </div>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="support.html">Support Us</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
   <div class="container">
-    <div class="description">
-      Hello everyone, I am Professional computer teacher. This is my channel for beginners  who wants to become expert in computers. 
-In this channel we are going to cover all the computer and technical knowledge.
-The videos are going to be in Hindi, we support all the Hindi learners who wants to learn tutorials in easy manner. 
+    <p><strong>Welcome to Computer Learning Class –</strong> your trusted destination for high-quality computer education. We specialize in delivering industry-relevant courses including DIT (Diploma in Information Technology), DCA (Diploma in Computer Applications), and DMA (Diploma in Multimedia & Animation). Whether you're a beginner or looking to advance your skills, our expertly designed programs provide the knowledge and hands-on experience needed to succeed in today’s digital world. Join us and take the first step towards a brighter, tech-savvy future.</p>
 
-Please share and subscribe  to my channel and press the bell icon so that you will notify everytime I upload a new video
-Email ID :-learningcomputer08@gmail.com
-    </div>
+    <h2>Our Courses</h2>
+    <ol>
+      <li>DIT (Diploma in Information Technology)</li>
+      <li>ADCA (Advanced Diploma in Computer Applications)</li>
+      <li>DCA (Diploma in Computer Applications)</li>
+      <li>DMA (Diploma in Multimedia & Animation)</li>
+      <li>DWD (Diploma in Web Designing)</li>
+    </ol>
 
-    <div class="buttons">
-      <a href="support.html">❤️ Support Us</a>
-      <a href="index.2.html">🌐 lets learn</a>
-    </div>
-
-    <div class="content-section">
-      <h2>🎥 intro</h2>
-      <div class="video-container">
-        <!-- Replace the src with your actual YouTube embed link -->
-        <iframe src="https://www.youtube.com/embed/WS0UA3QEsvw" allowfullscreen></iframe>
+    <!-- DIT -->
+    <div class="course">
+      <img src="image.jpg" alt="DIT Logo" />
+      <h3 class="course-title"><a href="dit.html">DIT - Diploma in Information Technology</a></h3>
+      <p class="price">Free - ₹0.00 INR</p>
+      <div id="desc-dit" class="description">
+        <p>Diploma in Information Technology (DIT) is a comprehensive program designed to equip students with essential IT skills and knowledge required in today’s technology-driven world. This course covers a wide range of topics including computer fundamentals, programming languages, database management, networking, web development, and cybersecurity. Ideal for beginners and aspiring IT professionals, the DIT program provides a strong foundation for further studies or entry-level positions in the IT industry. With practical training and real-world projects, students gain both theoretical understanding and hands-on experience to thrive in various technology roles.</p>
+      </div>
+      <div class="buttons">
+        <button onclick="toggleDescription('dit')" id="btn-dit">Show More</button>
       </div>
     </div>
 
-    <div class="content-section">
-      <h2>📂 Downloadable Code & Materials</h2>
-      <p style="color:#ffffff;">Coming soon! Stay tuned for exciting downloads and learning materials.</p>
+    <!-- ADCA -->
+    <div class="course">
+      <img src="picture.jpg" alt="ADCA Logo" />
+      <h3 class="course-title"><a href="adca.html">ADCA - Advanced Diploma in Computer Applications</a></h3>
+      <p class="price">Free - ₹0.00 INR</p>
+      <div id="desc-adca" class="description">
+        <p>Advanced Diploma in Computer Application (ADCA) is an in-depth program designed to provide comprehensive knowledge of advanced computer concepts and applications. This course builds upon the fundamentals covered in basic computer courses and explores topics such as advanced Microsoft Office tools, programming languages (like C, C++, or Python), database management systems, Tally with GST, internet technologies, web designing, and basic networking. ADCA is ideal for students, professionals, and job seekers aiming to enhance their technical proficiency and secure positions in IT, finance, education, and administration sectors. The course emphasizes practical training to ensure students are industry-ready and confident in using technology in real-world environments.</p>
+      </div>
+      <div class="buttons">
+        <button onclick="toggleDescription('adca')" id="btn-adca">Show More</button>
+      </div>
+    </div>
+
+    <!-- DCA -->
+    <div class="course">
+      <img src="image.2jpg" alt="DCA Logo" />
+      <h3 class="course-title"><a href="dca.html">DCA - Diploma in Computer Applications</a></h3>
+      <p class="price">Free - ₹0.00 INR</p>
+      <div id="desc-dca" class="description">
+        <p>Diploma in Computer Application (DCA) is a foundational course designed to introduce students to the essential concepts and practical applications of computers in various fields. The program covers key areas such as computer fundamentals, Microsoft Office tools (Word, Excel, PowerPoint), internet basics, programming fundamentals, and database management. DCA is ideal for students, professionals, and job seekers looking to enhance their computer literacy and improve their efficiency in office and administrative tasks. This course opens up opportunities in data entry, office administration, and IT support roles.</p>
+      </div>
+      <div class="buttons">
+        <button onclick="toggleDescription('dca')" id="btn-dca">Show More</button>
+      </div>
+    </div>
+
+    <!-- DMA -->
+    <div class="course">
+      <img src="image.3.jpg" alt="DMA Logo" />
+      <h3 class="course-title"><a href="dma.html">DMA - Diploma in Multimedia & Animation</a></h3>
+      <p class="price">Free - ₹0.00 INR</p>
+      <div id="desc-dma" class="description">
+        <p>Diploma in Multimedia & Animation (DMA) is a dynamic and creative program designed for individuals interested in the fields of digital media, visual storytelling, and animation. This course covers key subjects such as graphic design, 2D and 3D animation, video editing, visual effects (VFX), and multimedia production tools. With a strong focus on both artistic skills and technical proficiency, DMA prepares students for careers in animation studios, advertising agencies, game design, film production, and digital media companies. Whether you're an aspiring animator or a creative professional, this course provides the foundation to turn your imagination into impactful visual content.</p>
+      </div>
+      <div class="buttons">
+        <button onclick="toggleDescription('dma')" id="btn-dma">Show More</button>
+      </div>
+    </div>
+
+    <!-- DWD -->
+    <div class="course">
+      <img src="img.jpg" alt="DWD Logo" />
+      <h3 class="course-title"><a href="dwd.html">DWD - Diploma in Web Designing</a></h3>
+      <p class="price">Free - ₹0.00 INR</p>
+      <div id="desc-dwd" class="description">
+        <p>Diploma in Web Designing is a specialized program aimed at equipping students with the skills needed to design and develop modern, responsive, and user-friendly websites. The course covers essential topics such as HTML, CSS, JavaScript, UI/UX principles, graphic design basics, and popular web development tools and frameworks. Ideal for aspiring web designers, freelancers, and creative professionals, this program combines both design aesthetics and technical expertise. Upon completion, students will be capable of creating professional websites for businesses, portfolios, or e-commerce platforms, paving the way for a successful career in the web design industry.</p>
+      </div>
+      <div class="buttons">
+        <button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button>
+      </div>
     </div>
   </div>
+
+  <footer>
+    <div class="footer-buttons">
+      <a href="contact.html">Contact Us</a>
+      <a href="support.html">Support Us</a>
+    </div>
+    <p>&copy; 2025 Computer Learning Class. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
