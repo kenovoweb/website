@@ -109,7 +109,7 @@
     function toggleDescription(id) {
       const desc = document.getElementById('desc-' + id);
       const btn = document.getElementById('btn-' + id);
-      if (desc.style.display === 'none') {
+      if (desc.style.display === 'none' || desc.style.display === '') {
         desc.style.display = 'block';
         btn.innerText = 'Show Less';
       } else {
@@ -117,6 +117,19 @@
         btn.innerText = 'Show More';
       }
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.querySelector(".search-bar input");
+      const courses = document.querySelectorAll(".course");
+
+      searchInput.addEventListener("input", function () {
+        const query = searchInput.value.toLowerCase();
+        courses.forEach(course => {
+          const title = course.querySelector(".course-title").innerText.toLowerCase();
+          course.style.display = title.includes(query) ? "block" : "none";
+        });
+      });
+    });
   </script>
 </head>
 <body>
@@ -146,65 +159,65 @@
       <li>DWD (Diploma in Web Designing)</li>
     </ol>
 
-    <!-- DIT -->
+    <!-- Course: DIT -->
     <div class="course">
       <img src="image.jpg" alt="DIT Logo" />
       <h3 class="course-title"><a href="dit.html">DIT - Diploma in Information Technology</a></h3>
       <p class="price">Free - ₹0.00 INR</p>
       <div id="desc-dit" class="description">
-        <p>Diploma in Information Technology (DIT) is a comprehensive program designed to equip students with essential IT skills and knowledge required in today’s technology-driven world. This course covers a wide range of topics including computer fundamentals, programming languages, database management, networking, web development, and cybersecurity. Ideal for beginners and aspiring IT professionals, the DIT program provides a strong foundation for further studies or entry-level positions in the IT industry. With practical training and real-world projects, students gain both theoretical understanding and hands-on experience to thrive in various technology roles.</p>
+        <p>Diploma in Information Technology (DIT) is a comprehensive program designed to equip students with essential IT skills...</p>
       </div>
       <div class="buttons">
         <button onclick="toggleDescription('dit')" id="btn-dit">Show More</button>
       </div>
     </div>
 
-    <!-- ADCA -->
+    <!-- Course: ADCA -->
     <div class="course">
       <img src="picture.jpg" alt="ADCA Logo" />
       <h3 class="course-title"><a href="adca.html">ADCA - Advanced Diploma in Computer Applications</a></h3>
       <p class="price">Free - ₹0.00 INR</p>
       <div id="desc-adca" class="description">
-        <p>Advanced Diploma in Computer Application (ADCA) is an in-depth program designed to provide comprehensive knowledge of advanced computer concepts and applications. This course builds upon the fundamentals covered in basic computer courses and explores topics such as advanced Microsoft Office tools, programming languages (like C, C++, or Python), database management systems, Tally with GST, internet technologies, web designing, and basic networking. ADCA is ideal for students, professionals, and job seekers aiming to enhance their technical proficiency and secure positions in IT, finance, education, and administration sectors. The course emphasizes practical training to ensure students are industry-ready and confident in using technology in real-world environments.</p>
+        <p>Advanced Diploma in Computer Application (ADCA) provides comprehensive knowledge of advanced computer concepts and applications...</p>
       </div>
       <div class="buttons">
         <button onclick="toggleDescription('adca')" id="btn-adca">Show More</button>
       </div>
     </div>
 
-    <!-- DCA -->
+    <!-- Course: DCA -->
     <div class="course">
       <img src="image.2jpg" alt="DCA Logo" />
       <h3 class="course-title"><a href="dca.html">DCA - Diploma in Computer Applications</a></h3>
       <p class="price">Free - ₹0.00 INR</p>
       <div id="desc-dca" class="description">
-        <p>Diploma in Computer Application (DCA) is a foundational course designed to introduce students to the essential concepts and practical applications of computers in various fields. The program covers key areas such as computer fundamentals, Microsoft Office tools (Word, Excel, PowerPoint), internet basics, programming fundamentals, and database management. DCA is ideal for students, professionals, and job seekers looking to enhance their computer literacy and improve their efficiency in office and administrative tasks. This course opens up opportunities in data entry, office administration, and IT support roles.</p>
+        <p>DCA is a foundational course that introduces students to essential concepts of computers in various fields...</p>
       </div>
       <div class="buttons">
         <button onclick="toggleDescription('dca')" id="btn-dca">Show More</button>
       </div>
     </div>
 
-    <!-- DMA -->
+    <!-- Course: DMA -->
     <div class="course">
       <img src="image.3.jpg" alt="DMA Logo" />
       <h3 class="course-title"><a href="dma.html">DMA - Diploma in Multimedia & Animation</a></h3>
       <p class="price">Free - ₹0.00 INR</p>
       <div id="desc-dma" class="description">
-        <p>Diploma in Multimedia & Animation (DMA) is a dynamic and creative program designed for individuals interested in the fields of digital media, visual storytelling, and animation. This course covers key subjects such as graphic design, 2D and 3D animation, video editing, visual effects (VFX), and multimedia production tools. With a strong focus on both artistic skills and technical proficiency, DMA prepares students for careers in animation studios, advertising agencies, game design, film production, and digital media companies. Whether you're an aspiring animator or a creative professional, this course provides the foundation to turn your imagination into impactful visual content.</p>
+        <p>DMA is a creative program covering design, 2D/3D animation, video editing, and VFX to prepare students for digital media careers...</p>
       </div>
       <div class="buttons">
         <button onclick="toggleDescription('dma')" id="btn-dma">Show More</button>
       </div>
     </div>
 
-    <!-- DWD -->
+    <!-- Course: DWD -->
     <div class="course">
       <img src="img.jpg" alt="DWD Logo" />
       <h3 class="course-title"><a href="dwd.html">DWD - Diploma in Web Designing</a></h3>
       <p class="price">Free - ₹0.00 INR</p>
       <div id="desc-dwd" class="description">
-        <p>Diploma in Web Designing is a specialized program aimed at equipping students with the skills needed to design and develop modern, responsive, and user-friendly websites. The course covers essential topics such as HTML, CSS, JavaScript, UI/UX principles, graphic design basics, and popular web development tools and frameworks. Ideal for aspiring web designers, freelancers, and creative professionals, this program combines both design aesthetics and technical expertise. Upon completion, students will be capable of creating professional websites for businesses, portfolios, or e-commerce platforms, paving the way for a successful career in the web design industry.</p>
+        <p>DWD teaches HTML, CSS, JavaScript, and design tools to build modern, responsive websites...</p>
       </div>
       <div class="buttons">
         <button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button>
