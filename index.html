@@ -16,68 +16,96 @@
       background-color: #ffffff;
       color: #000;
     }
+
     header {
       background-color: #003366;
       color: white;
       padding: 20px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
     }
+
     header h1 {
       margin: 0;
       font-size: 28px;
     }
+
+    .search-bar {
+      margin-top: 10px;
+    }
+
     .search-bar input {
       padding: 7px;
       border: none;
       border-radius: 4px;
+      width: 100%;
+      max-width: 250px;
     }
+
     nav {
       background-color: #002244;
       padding: 10px 20px;
       text-align: center;
     }
+
     nav a {
       color: white;
-      margin: 0 15px;
+      margin: 5px 10px;
+      display: inline-block;
       text-decoration: none;
       font-weight: bold;
     }
+
     nav a:hover {
       text-decoration: underline;
     }
+
     .container {
       padding: 20px;
     }
+
     .course {
       border: 1px solid #ccc;
       border-radius: 8px;
       margin-bottom: 20px;
       padding: 15px;
       background-color: #f9f9f9;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 15px;
     }
+
     .course img {
       width: 100px;
       height: 100px;
       object-fit: cover;
+      flex-shrink: 0;
     }
+
     .course-title {
       font-size: 20px;
       color: #003366;
-      margin-top: 0;
+      margin: 0;
     }
+
     .price {
       color: green;
       font-weight: bold;
+      margin: 5px 0;
     }
+
     .description {
       display: none;
       margin-top: 10px;
     }
+
     .buttons {
       margin-top: 10px;
     }
+
     .buttons button {
       background-color: #003366;
       color: white;
@@ -86,9 +114,11 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     .buttons button:hover {
       background-color: #001a33;
     }
+
     footer {
       background-color: #003366;
       color: white;
@@ -96,6 +126,7 @@
       padding: 20px;
       margin-top: 40px;
     }
+
     .footer-buttons a {
       background-color: #004080;
       color: white;
@@ -104,6 +135,60 @@
       margin: 10px;
       display: inline-block;
       border-radius: 5px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      nav {
+        font-size: 16px;
+      }
+
+      .course {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .course img {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .search-bar input {
+        width: 100%;
+      }
+
+      .course-title {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 20px;
+      }
+
+      .footer-buttons a {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
     }
   </style>
   <script>
@@ -127,7 +212,7 @@
         const query = searchInput.value.toLowerCase();
         courses.forEach(course => {
           const title = course.querySelector(".course-title").innerText.toLowerCase();
-          course.style.display = title.includes(query) ? "block" : "none";
+          course.style.display = title.includes(query) ? "flex" : "none";
         });
       });
     });
@@ -163,65 +248,75 @@
     <!-- Course: DIT -->
     <div class="course">
       <img src="photos/72e19696-c7e8-4747-8f23-fd5c94502f4e.jpg" alt="DIT Logo" />
-      <h3 class="course-title"><a href="dit.html">DIT - Diploma in Information Technology</a></h3>
-      <p class="price">Free - ₹0.00 INR</p>
-      <div id="desc-dit" class="description">
-        <p>Diploma in Information Technology (DIT) is a comprehensive program designed to equip students with essential IT skills...</p>
-      </div>
-      <div class="buttons">
-        <button onclick="toggleDescription('dit')" id="btn-dit">Show More</button>
+      <div>
+        <h3 class="course-title"><a href="dit.html">DIT - Diploma in Information Technology</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-dit" class="description">
+          <p>Diploma in Information Technology (DIT) is a comprehensive program designed to equip students with essential IT skills...</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dit')" id="btn-dit">Show More</button>
+        </div>
       </div>
     </div>
 
     <!-- Course: ADCA -->
     <div class="course">
       <img src="picture.jpg" alt="ADCA Logo" />
-      <h3 class="course-title"><a href="adca.html">ADCA - Advanced Diploma in Computer Applications</a></h3>
-      <p class="price">Free - ₹0.00 INR</p>
-      <div id="desc-adca" class="description">
-        <p>Advanced Diploma in Computer Application (ADCA) provides comprehensive knowledge of advanced computer concepts and applications...</p>
-      </div>
-      <div class="buttons">
-        <button onclick="toggleDescription('adca')" id="btn-adca">Show More</button>
+      <div>
+        <h3 class="course-title"><a href="adca.html">ADCA - Advanced Diploma in Computer Applications</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-adca" class="description">
+          <p>Advanced Diploma in Computer Application (ADCA) provides comprehensive knowledge of advanced computer concepts and applications...</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('adca')" id="btn-adca">Show More</button>
+        </div>
       </div>
     </div>
 
     <!-- Course: DCA -->
     <div class="course">
       <img src="image.2jpg" alt="DCA Logo" />
-      <h3 class="course-title"><a href="dca.html">DCA - Diploma in Computer Applications</a></h3>
-      <p class="price">Free - ₹0.00 INR</p>
-      <div id="desc-dca" class="description">
-        <p>DCA is a foundational course that introduces students to essential concepts of computers in various fields...</p>
-      </div>
-      <div class="buttons">
-        <button onclick="toggleDescription('dca')" id="btn-dca">Show More</button>
+      <div>
+        <h3 class="course-title"><a href="dca.html">DCA - Diploma in Computer Applications</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-dca" class="description">
+          <p>DCA is a foundational course that introduces students to essential concepts of computers in various fields...</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dca')" id="btn-dca">Show More</button>
+        </div>
       </div>
     </div>
 
     <!-- Course: DMA -->
     <div class="course">
       <img src="image.3.jpg" alt="DMA Logo" />
-      <h3 class="course-title"><a href="dma.html">DMA - Diploma in Multimedia & Animation</a></h3>
-      <p class="price">Free - ₹0.00 INR</p>
-      <div id="desc-dma" class="description">
-        <p>DMA is a creative program covering design, 2D/3D animation, video editing, and VFX to prepare students for digital media careers...</p>
-      </div>
-      <div class="buttons">
-        <button onclick="toggleDescription('dma')" id="btn-dma">Show More</button>
+      <div>
+        <h3 class="course-title"><a href="dma.html">DMA - Diploma in Multimedia & Animation</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-dma" class="description">
+          <p>DMA is a creative program covering design, 2D/3D animation, video editing, and VFX to prepare students for digital media careers...</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dma')" id="btn-dma">Show More</button>
+        </div>
       </div>
     </div>
 
     <!-- Course: DWD -->
     <div class="course">
       <img src="img.jpg" alt="DWD Logo" />
-      <h3 class="course-title"><a href="dwd.html">DWD - Diploma in Web Designing</a></h3>
-      <p class="price">Free - ₹0.00 INR</p>
-      <div id="desc-dwd" class="description">
-        <p>DWD teaches HTML, CSS, JavaScript, and design tools to build modern, responsive websites...</p>
-      </div>
-      <div class="buttons">
-        <button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button>
+      <div>
+        <h3 class="course-title"><a href="dwd.html">DWD - Diploma in Web Designing</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-dwd" class="description">
+          <p>DWD teaches HTML, CSS, JavaScript, and design tools to build modern, responsive websites...</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button>
+        </div>
       </div>
     </div>
   </div>
