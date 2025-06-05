@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="google-site-verification" content="r2W-DFto_qPg6qHA-vbxmakC6_g4VgPhhALQvcsyv88" />
-<meta name="google-site-verification" content="TpFjiWC9-Vr83nDDwp-bpL9TSerAemQvcYMiwV6cjIU" />
+  <meta name="google-site-verification" content="TpFjiWC9-Vr83nDDwp-bpL9TSerAemQvcYMiwV6cjIU" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Welcome to Computer Learning Class – your trusted destination for high-quality computer education. Courses include DIT, DCA, DMA, ADCA, and DWD, designed to help students gain practical IT skills." />
   <meta name="keywords" content="computer courses, DIT, DCA, DMA, ADCA, DWD, IT education, online learning, Computer Learning Class" />
@@ -11,21 +11,48 @@
   <title>Computer Learning Class</title>
   <link rel="icon" type="image/jpg" href="photos/72e19696-c7e8-4747-8f23-fd5c94502f4e.jpg" />
   <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --header-color: #003366;
+      --nav-color: #002244;
+      --accent-color: #004080;
+    }
+
+    body.dark {
+      --bg-color: #1e1e1e;
+      --text-color: #f0f0f0;
+      --header-color: #1a1a1a;
+      --nav-color: #111;
+      --accent-color: #444;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      color: #000;
+      background-color: var(--bg-color);
+      color: var(--text-color);
     }
 
-header {
-      background-color: #003366;
+    header {
+      background-color: var(--header-color);
       color: white;
       padding: 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+    }
+
+    header .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    header img {
+      height: 50px;
+      width: auto;
     }
 
     header h1 {
@@ -45,8 +72,12 @@ header {
       max-width: 250px;
     }
 
+    .theme-switcher {
+      margin-left: 20px;
+    }
+
     nav {
-      background-color: #002244;
+      background-color: var(--nav-color);
       padding: 10px 20px;
       text-align: center;
     }
@@ -88,7 +119,7 @@ header {
 
     .course-title {
       font-size: 20px;
-      color: #003366;
+      color: var(--header-color);
       margin: 0;
     }
 
@@ -108,7 +139,7 @@ header {
     }
 
     .buttons button {
-      background-color: #003366;
+      background-color: var(--header-color);
       color: white;
       border: none;
       padding: 7px 12px;
@@ -120,8 +151,37 @@ header {
       background-color: #001a33;
     }
 
+    .review-slider {
+      overflow: hidden;
+      width: 100%;
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .review-track {
+      display: flex;
+      width: max-content;
+      animation: scrollReviews 20s linear infinite;
+    }
+
+    .review {
+      min-width: 100%;
+      flex-shrink: 0;
+      padding: 20px;
+      font-style: italic;
+      color: #333;
+    }
+
+    @keyframes scrollReviews {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-400%); }
+    }
+
     footer {
-      background-color: #003366;
+      background-color: var(--header-color);
       color: white;
       text-align: center;
       padding: 20px;
@@ -129,7 +189,7 @@ header {
     }
 
     .footer-buttons a {
-      background-color: #004080;
+      background-color: var(--accent-color);
       color: white;
       text-decoration: none;
       padding: 10px 20px;
@@ -138,7 +198,6 @@ header {
       border-radius: 5px;
     }
 
-    /* Responsive Styles */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -147,10 +206,6 @@ header {
 
       header h1 {
         font-size: 24px;
-      }
-
-      nav {
-        font-size: 16px;
       }
 
       .course {
@@ -169,10 +224,6 @@ header {
       }
 
       .search-bar {
-        width: 100%;
-      }
-
-      .search-bar input {
         width: 100%;
       }
 
@@ -216,15 +267,29 @@ header {
           course.style.display = title.includes(query) ? "flex" : "none";
         });
       });
+
+      const toggle = document.getElementById("theme-toggle");
+      toggle.addEventListener("click", function () {
+        document.body.classList.toggle("dark");
+        toggle.innerText = document.body.classList.contains("dark") ? "Switch to Light Mode" : "Switch to Dark Mode";
+      });
     });
   </script>
 </head>
 <body>
 
   <header>
-    <h1>Computer Learning Class</h1>
-    <div class="search-bar">
-      <input type="text" placeholder="Search courses..." />
+    <div class="logo-title">
+      <img src="photos/logo.png" alt="Logo" />
+      <h1>Computer Learning Class</h1>
+    </div>
+    <div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search courses..." />
+      </div>
+      <div class="theme-switcher">
+        <button id="theme-toggle">Switch to Dark Mode</button>
+      </div>
     </div>
   </header>
 
@@ -235,100 +300,4 @@ header {
   </nav>
 
   <div class="container">
-    <p><strong>Welcome to Computer Learning Class –</strong> your trusted destination for high-quality computer education. We specialize in delivering industry-relevant courses including DIT (Diploma in Information Technology), DCA (Diploma in Computer Applications), and DMA (Diploma in Multimedia & Animation). Whether you're a beginner or looking to advance your skills, our expertly designed programs provide the knowledge and hands-on experience needed to succeed in today’s digital world. Join us and take the first step towards a brighter, tech-savvy future.</p>
-
-    <h2>Our Courses</h2>
-    <ol>
-      <li>DIT (Diploma in Information Technology)</li>
-      <li>ADCA (Advanced Diploma in Computer Applications)</li>
-      <li>DCA (Diploma in Computer Applications)</li>
-      <li>DMA (Diploma in Multimedia & Animation)</li>
-      <li>DWD (Diploma in Web Designing)</li>
-    </ol>
-
-    <!-- Course: DIT -->
-    <div class="course">
-      <img src="photos/72e19696-c7e8-4747-8f23-fd5c94502f4e.jpg" alt="DIT Logo" />
-      <div>
-        <h3 class="course-title"><a href="dit.html">DIT - Diploma in Information Technology</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
-        <div id="desc-dit" class="description">
-          <p>Diploma in Information Technology (DIT) is a comprehensive program designed to equip students with essential IT skills...</p>
-        </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('dit')" id="btn-dit">Show More</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Course: ADCA -->
-    <div class="course">
-      <img src="picture.jpg" alt="ADCA Logo" />
-      <div>
-        <h3 class="course-title"><a href="adca.html">ADCA - Advanced Diploma in Computer Applications</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
-        <div id="desc-adca" class="description">
-          <p>Advanced Diploma in Computer Application (ADCA) provides comprehensive knowledge of advanced computer concepts and applications...</p>
-        </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('adca')" id="btn-adca">Show More</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Course: DCA -->
-    <div class="course">
-      <img src="image.2jpg" alt="DCA Logo" />
-      <div>
-        <h3 class="course-title"><a href="dca.html">DCA - Diploma in Computer Applications</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
-        <div id="desc-dca" class="description">
-          <p>DCA is a foundational course that introduces students to essential concepts of computers in various fields...</p>
-        </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('dca')" id="btn-dca">Show More</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Course: DMA -->
-    <div class="course">
-      <img src="image.3.jpg" alt="DMA Logo" />
-      <div>
-        <h3 class="course-title"><a href="dma.html">DMA - Diploma in Multimedia & Animation</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
-        <div id="desc-dma" class="description">
-          <p>DMA is a creative program covering design, 2D/3D animation, video editing, and VFX to prepare students for digital media careers...</p>
-        </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('dma')" id="btn-dma">Show More</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Course: DWD -->
-    <div class="course">
-      <img src="img.jpg" alt="DWD Logo" />
-      <div>
-        <h3 class="course-title"><a href="dwd.html">DWD - Diploma in Web Designing</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
-        <div id="desc-dwd" class="description">
-          <p>DWD teaches HTML, CSS, JavaScript, and design tools to build modern, responsive websites...</p>
-        </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <div class="footer-buttons">
-      <a href="contact.html">Contact Us</a>
-      <a href="support.html">Support Us</a>
-    </div>
-    <p>&copy; 2025 Computer Learning Class. All rights reserved.</p>
-  </footer>
-
-</body>
-</html>
+    <p><strong>Welcome to Computer Learning Class –</strong> your trusted destination for high-quality computer education. We specialize in delivering industry-relevant courses including DIT (Diploma in Information Technology), DCA
