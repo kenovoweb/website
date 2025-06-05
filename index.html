@@ -2,90 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="google-site-verification" content="r2W-DFto_qPg6qHA-vbxmakC6_g4VgPhhALQvcsyv88" />
-  <meta name="google-site-verification" content="TpFjiWC9-Vr83nDDwp-bpL9TSerAemQvcYMiwV6cjIU" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Welcome to Computer Learning Class – your trusted destination for high-quality computer education. Courses include DIT, DCA, DMA, ADCA, and DWD, designed to help students gain practical IT skills." />
-  <meta name="keywords" content="computer courses, DIT, DCA, DMA, ADCA, DWD, IT education, online learning, Computer Learning Class" />
+  <meta name="description" content="Welcome to Computer Learning Class – your trusted destination for high-quality computer education." />
+  <meta name="keywords" content="computer courses, DIT, DCA, DMA, ADCA, DWD" />
   <meta name="author" content="Computer Learning Class" />
   <title>Computer Learning Class</title>
-  <link rel="icon" type="image/jpg" href="photos/72e19696-c7e8-4747-8f23-fd5c94502f4e.jpg" />
+  <link rel="icon" type="image/jpg" href="photos/logo.png" />
+
   <style>
     :root {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --header-color: #003366;
-      --nav-color: #002244;
-      --accent-color: #004080;
+      --bg: #ffffff;
+      --text: #000;
+      --header: #003366;
+      --nav: #002244;
+      --accent: #004080;
     }
 
     body.dark {
-      --bg-color: #1e1e1e;
-      --text-color: #f0f0f0;
-      --header-color: #1a1a1a;
-      --nav-color: #111;
-      --accent-color: #444;
+      --bg: #1e1e1e;
+      --text: #f0f0f0;
+      --header: #1a1a1a;
+      --nav: #111;
+      --accent: #444;
     }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: var(--bg);
+      color: var(--text);
     }
 
     header {
-      background-color: var(--header-color);
+      background-color: var(--header);
       color: white;
       padding: 20px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
+      flex-wrap: wrap;
       align-items: center;
     }
 
-    header .logo-title {
+    .logo-title {
       display: flex;
       align-items: center;
       gap: 15px;
     }
 
-    header img {
+    .logo-title img {
       height: 50px;
-      width: auto;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    .search-bar {
-      margin-top: 10px;
+    .search-theme {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
     }
 
     .search-bar input {
       padding: 7px;
       border: none;
       border-radius: 4px;
-      width: 100%;
-      max-width: 250px;
+      width: 200px;
     }
 
-    .theme-switcher {
-      margin-left: 20px;
+    #theme-toggle {
+      padding: 6px 12px;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
 
     nav {
-      background-color: var(--nav-color);
-      padding: 10px 20px;
+      background-color: var(--nav);
+      padding: 10px;
       text-align: center;
     }
 
     nav a {
       color: white;
-      margin: 5px 10px;
-      display: inline-block;
+      margin: 0 10px;
       text-decoration: none;
       font-weight: bold;
     }
@@ -114,19 +113,17 @@
       width: 100px;
       height: 100px;
       object-fit: cover;
-      flex-shrink: 0;
     }
 
     .course-title {
       font-size: 20px;
-      color: var(--header-color);
+      color: var(--header);
       margin: 0;
     }
 
     .price {
       color: green;
       font-weight: bold;
-      margin: 5px 0;
     }
 
     .description {
@@ -134,15 +131,11 @@
       margin-top: 10px;
     }
 
-    .buttons {
-      margin-top: 10px;
-    }
-
     .buttons button {
-      background-color: var(--header-color);
+      background-color: var(--header);
       color: white;
       border: none;
-      padding: 7px 12px;
+      padding: 6px 10px;
       border-radius: 4px;
       cursor: pointer;
     }
@@ -153,10 +146,9 @@
 
     .review-slider {
       overflow: hidden;
-      width: 100%;
       max-width: 800px;
       margin: 40px auto;
-      background-color: #f1f1f1;
+      background: #f1f1f1;
       border-radius: 10px;
       padding: 15px;
     }
@@ -164,7 +156,7 @@
     .review-track {
       display: flex;
       width: max-content;
-      animation: scrollReviews 20s linear infinite;
+      animation: scroll 20s linear infinite;
     }
 
     .review {
@@ -175,37 +167,32 @@
       color: #333;
     }
 
-    @keyframes scrollReviews {
+    @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-400%); }
     }
 
     footer {
-      background-color: var(--header-color);
+      background-color: var(--header);
       color: white;
       text-align: center;
       padding: 20px;
-      margin-top: 40px;
     }
 
     .footer-buttons a {
-      background-color: var(--accent-color);
+      background-color: var(--accent);
       color: white;
-      text-decoration: none;
       padding: 10px 20px;
-      margin: 10px;
-      display: inline-block;
+      text-decoration: none;
       border-radius: 5px;
+      margin: 5px;
+      display: inline-block;
     }
 
     @media (max-width: 768px) {
       header {
         flex-direction: column;
         align-items: flex-start;
-      }
-
-      header h1 {
-        font-size: 24px;
       }
 
       .course {
@@ -219,30 +206,12 @@
         max-width: 300px;
       }
 
-      .container {
-        padding: 10px;
-      }
-
-      .search-bar {
-        width: 100%;
-      }
-
-      .course-title {
-        font-size: 18px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 20px;
-      }
-
-      .footer-buttons a {
-        padding: 8px 12px;
-        font-size: 14px;
+      .search-theme {
+        align-items: flex-start;
       }
     }
   </style>
+
   <script>
     function toggleDescription(id) {
       const desc = document.getElementById('desc-' + id);
@@ -256,11 +225,12 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", () => {
       const searchInput = document.querySelector(".search-bar input");
       const courses = document.querySelectorAll(".course");
+      const toggle = document.getElementById("theme-toggle");
 
-      searchInput.addEventListener("input", function () {
+      searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
         courses.forEach(course => {
           const title = course.querySelector(".course-title").innerText.toLowerCase();
@@ -268,10 +238,9 @@
         });
       });
 
-      const toggle = document.getElementById("theme-toggle");
-      toggle.addEventListener("click", function () {
+      toggle.addEventListener("click", () => {
         document.body.classList.toggle("dark");
-        toggle.innerText = document.body.classList.contains("dark") ? "Switch to Light Mode" : "Switch to Dark Mode";
+        toggle.textContent = document.body.classList.contains("dark") ? "Switch to Light Mode" : "Switch to Dark Mode";
       });
     });
   </script>
@@ -280,16 +249,14 @@
 
   <header>
     <div class="logo-title">
-      <img src="photos/72e19696-c7e8-4747-8f23-fd5c94502f4e.jpg" alt="Logo" />
+      <img src="photos/logo.png" alt="Logo" />
       <h1>Computer Learning Class</h1>
     </div>
-    <div>
+    <div class="search-theme">
       <div class="search-bar">
         <input type="text" placeholder="Search courses..." />
       </div>
-      <div class="theme-switcher">
-        <button id="theme-toggle">Switch to Dark Mode</button>
-      </div>
+      <button id="theme-toggle">Switch to Dark Mode</button>
     </div>
   </header>
 
@@ -300,4 +267,108 @@
   </nav>
 
   <div class="container">
-    <p><strong>Welcome to Computer Learning Class –</strong> your trusted destination for high-quality computer education. We specialize in delivering industry-relevant courses including DIT (Diploma in Information Technology), DCA
+    <p><strong>Welcome to Computer Learning Class –</strong> your trusted destination for high-quality computer education.</p>
+
+    <h2>About Us</h2>
+    <p>We offer certified diploma programs in Information Technology, Computer Applications, Multimedia & Animation, and Web Design. Our mission is to make digital skills accessible to everyone, helping learners gain real-world knowledge, completely free of charge.</p>
+
+    <h2>Our Courses</h2>
+
+    <!-- DIT -->
+    <div class="course">
+      <img src="photos/dit.jpg" alt="DIT" />
+      <div>
+        <h3 class="course-title"><a href="dit.html">DIT - Diploma in Information Technology</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-dit" class="description">
+          <p>This diploma builds a strong foundation in IT basics, hardware, software, networking, and more.</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dit')" id="btn-dit">Show More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADCA -->
+    <div class="course">
+      <img src="photos/adca.jpg" alt="ADCA" />
+      <div>
+        <h3 class="course-title"><a href="adca.html">ADCA - Advanced Diploma in Computer Applications</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-adca" class="description">
+          <p>Master advanced office tools, database management, and web applications in this course.</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('adca')" id="btn-adca">Show More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DCA -->
+    <div class="course">
+      <img src="photos/dca.jpg" alt="DCA" />
+      <div>
+        <h3 class="course-title"><a href="dca.html">DCA - Diploma in Computer Applications</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-dca" class="description">
+          <p>Introductory course covering basic computer skills, MS Office, and internet tools.</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dca')" id="btn-dca">Show More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DMA -->
+    <div class="course">
+      <img src="photos/dma.jpg" alt="DMA" />
+      <div>
+        <h3 class="course-title"><a href="dma.html">DMA - Diploma in Multimedia & Animation</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-dma" class="description">
+          <p>Learn animation, graphics, 3D modeling, and motion video editing in this creative course.</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dma')" id="btn-dma">Show More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DWD -->
+    <div class="course">
+      <img src="photos/dwd.jpg" alt="DWD" />
+      <div>
+        <h3 class="course-title"><a href="dwd.html">DWD - Diploma in Web Designing</a></h3>
+        <p class="price">Free - ₹0.00 INR</p>
+        <div id="desc-dwd" class="description">
+          <p>Master HTML, CSS, JavaScript, and build responsive websites and portfolios.</p>
+        </div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="review-slider">
+      <div class="review-track">
+        <div class="review">"Best free computer course platform I've found!" – Aarti S.</div>
+        <div class="review">"Simple, effective, and easy to learn. Highly recommend!" – Raj P.</div>
+        <div class="review">"Courses are well structured and free – amazing!" – Meena T.</div>
+        <div class="review">"Perfect for beginners wanting to enter IT field." – John K.</div>
+        <div class="review">"This platform gave me a career path in tech!" – Ravi D.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-buttons">
+      <a href="contact.html">Contact Us</a>
+      <a href="support.html">Support Us</a>
+    </div>
+    <p>&copy; 2025 Computer Learning Class. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
