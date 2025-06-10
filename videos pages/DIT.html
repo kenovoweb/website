@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DIT Video Course Player</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
+      background-size: 600% 600%;
+      animation: BackgroundShift 20s ease infinite;
+      color: #fff;
+    }
+
+    @keyframes BackgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+      border-bottom: 2px solid #00ffff;
+    }
+
+    h1 {
+      color: #00ffff;
+      margin-bottom: 0.3rem;
+    }
+
+    p.summary {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    .course-section {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    select, button {
+      margin: 0.5rem;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    select {
+      background-color: #333;
+      color: #00ffff;
+    }
+
+    button {
+      background-color: #00ffff;
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #00dddd;
+    }
+
+    iframe {
+      width: 90%;
+      height: 500px;
+      max-width: 960px;
+      margin: 1rem auto;
+      display: block;
+      border: 4px solid #00ffff;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Diploma in Information Technology (DIT)</h1>
+    <p class="summary">
+      This 1-year offline course offers hands-on learning in key IT tools and programming languages. The syllabus includes:
+      <strong>MS Office</strong>, <strong>Tally</strong>, <strong>PageMaker</strong>, <strong>CorelDRAW</strong>, <strong>Photoshop</strong>, <strong>C Language</strong>, and <strong>C++ Language</strong>. Each subject is divided into 5 comprehensive video chapters.
+    </p>
+  </header>
+
+  <section class="course-section">
+    <h2>Select Subject and Chapter</h2>
+    <div>
+      <select id="subjectSelect">
+        <option value="ms_office">MS Office</option>
+        <option value="tally">Tally</option>
+        <option value="pagemaker">PageMaker</option>
+        <option value="coreldraw">CorelDRAW</option>
+        <option value="photoshop">Photoshop</option>
+        <option value="c_language">C Language</option>
+        <option value="cpp_language">C++ Language</option>
+      </select>
+
+      <select id="chapterSelect">
+        <option value="0">Chapter 1</option>
+        <option value="1">Chapter 2</option>
+        <option value="2">Chapter 3</option>
+        <option value="3">Chapter 4</option>
+        <option value="4">Chapter 5</option>
+      </select>
+
+      <button onclick="loadVideo()">Load Video</button>
+      <button onclick="nextEpisode()">Next Episode</button>
+      <button onclick="toggleAutoNext()">Toggle Auto Next: <span id="autoStatus">OFF</span></button>
+    </div>
+
+    <iframe id="videoFrame" src="" allowfullscreen></iframe>
+  </section>
+
+  <script>
+    const videoLinks = {
+      ms_office: [
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID1",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID2",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID4",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID5"
+      ],
+      tally: [
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID1",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID2",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID4",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID5"
+      ],
+      pagemaker: [
+       "https://www.youtube.com/embed/ctJe7X9gsNg",
+"https://www.youtube.com/embed/CWD792opAQ4",
+"https://www.youtube.com/embed/IGR5iBFbGX4",
+"https://www.youtube.com/embed/x-wm2aVeoLI",
+"https://www.youtube.com/embed/Ue2LNRRvzqk",
+"https://www.youtube.com/embed/RZK_AfouZCc",
+"https://www.youtube.com/embed/R_yuLf4QgTY",
+"https://www.youtube.com/embed/2h-__O5Prj4",
+"https://www.youtube.com/embed/irgdsmFqDB8",
+"https://www.youtube.com/embed/tM4EAzKtmuk",
+"https://www.youtube.com/embed/WRKSclE3P7k",
+"https://www.youtube.com/embed/aWg3WJnpTB8",
+"https://www.youtube.com/embed/WjrIOntDNfQ",
+"https://www.youtube.com/embed/7gai5si0Hig",
+
+      ],
+      coreldraw: [
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID1",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID2",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID4",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID5"
+      ],
+      photoshop: [
+       "https://www.youtube.com/embed/Mpf60TASj1A",
+"https://www.youtube.com/embed/j29G7g6n0n8",
+"https://www.youtube.com/embed/xJHW5kIanEo",
+"https://www.youtube.com/embed/6K1af-i40z0",
+"https://www.youtube.com/embed/OPBC59yNyuU",
+"https://www.youtube.com/embed/Vnh3f2hom8Y",
+"https://www.youtube.com/embed/szth60ZTcbk",
+"https://www.youtube.com/embed/Og0d1yF00RQ",
+"https://www.youtube.com/embed/LQWiyAWU0vw",
+"https://www.youtube.com/embed/VJAqLUbZsN0",
+"https://www.youtube.com/embed/f5AtKgnw7eQ",
+"https://www.youtube.com/embed/GN94SMgMw84",
+"https://www.youtube.com/embed/MtfOEMw0VFk",
+"https://www.youtube.com/embed/3AE3yUjJhc4",
+"https://www.youtube.com/embed/TLxFetf0kNU",
+"https://www.youtube.com/embed/JkyNpRaDBMQ",
+"https://www.youtube.com/embed/j66uj2AV67U",
+"https://www.youtube.com/embed/PeN3OxoTW1s",
+"https://www.youtube.com/embed/vJDWeyJVacw",
+"https://www.youtube.com/embed/gUIvvC7b6gI",
+"https://www.youtube.com/embed/-mnFlgde4hU",
+"https://www.youtube.com/embed/eoiAFhc6Pzk",
+"https://www.youtube.com/embed/GWPPUY7dVDY",
+"https://www.youtube.com/embed/F90xbGZMRNo",
+"https://www.youtube.com/embed/RzpqhrPYp1M",
+"https://www.youtube.com/embed/hWHzpFG4JZ4",
+      ],
+      c_language: [
+        "https://www.youtube.com/embed/yNjIu9bgfus",
+"https://www.youtube.com/embed/OL1Nu8CMU7Y",
+"https://www.youtube.com/embed/7QwJlEVS6NE",
+"https://www.youtube.com/embed/y8I6R1GyIR8",
+"https://www.youtube.com/embed/WS0UA3QEsvw",
+"https://www.youtube.com/embed/tB9THbLuCtY",
+"https://www.youtube.com/embed/XZVd-ROchEE",
+"https://www.youtube.com/embed/VY6MBxsQtrE",
+"https://www.youtube.com/embed/JtOjoQ8PnEg",
+"https://www.youtube.com/embed/IdZ2vx6-2NI",
+"https://www.youtube.com/embed/s4Mk1BBK9qY",
+"https://www.youtube.com/embed/JR1tKogJ4Xw",
+"https://www.youtube.com/embed/ujRdLvmstKc",
+"https://www.youtube.com/embed/uUVTwkdTGh0",
+"https://www.youtube.com/embed/Y5YGUx8r2Dg",
+"https://www.youtube.com/embed/eWh-EC_DOJw",
+"https://www.youtube.com/embed/w7LzJSp7QZs",
+"https://www.youtube.com/embed/sLkn9smcANQ",
+"https://www.youtube.com/embed/wp-ipvdFkgI",
+"https://www.youtube.com/embed/A7ujVu2IA80",
+"https://www.youtube.com/embed/kmn7-S1aPuM",
+"https://www.youtube.com/embed/cgKYdoUMEYs",
+"https://www.youtube.com/embed/PIHwT2-wBc0",
+"https://www.youtube.com/embed/Snh9jBbNfZ4",
+"https://www.youtube.com/embed/B9X7je8VABI",
+"https://www.youtube.com/embed/HGO93hZH2pY",
+"https://www.youtube.com/embed/QeVHhi5RHXk",
+"https://www.youtube.com/embed/x3G85xyLywM",
+"https://www.youtube.com/embed/2U_6QUXt3cE",
+"https://www.youtube.com/embed/pyjmJybjJkQ",
+"https://www.youtube.com/embed/Ah0J6m8P_rQ",
+"https://www.youtube.com/embed/n4K-zEvlKLY",
+"https://www.youtube.com/embed/zeJ-Xt0CYlQ",
+"https://www.youtube.com/embed/1Cqb7QmlVHY",
+"https://www.youtube.com/embed/6ajli68ayxg",
+"https://www.youtube.com/embed/VqwJMpgdDxM",
+"https://www.youtube.com/embed/-1bZQkkBJAY",
+"https://www.youtube.com/embed/62Yt-jHv0DY",
+"https://www.youtube.com/embed/fyaFdHxfcy8",
+"https://www.youtube.com/embed/mDFsMQi3Ym0",
+"https://www.youtube.com/embed/tHS2bPe6ieA",
+"https://www.youtube.com/embed/TsPMYHkiF2o",
+"https://www.youtube.com/embed/4bEBM19m4rU",
+"https://www.youtube.com/embed/SGLSwetrrc8",
+"https://www.youtube.com/embed/ecZ5i9IXnl4",
+"https://www.youtube.com/embed/1KzMXA3tiQg",
+"https://www.youtube.com/embed/nBmScRDkmy0",
+"https://www.youtube.com/embed/yTA2xrHyiUU",
+"https://www.youtube.com/embed/mPAhq7zs0ZM",
+"https://www.youtube.com/embed/TiflfOnnU-4",
+"https://www.youtube.com/embed/XAD2iekjjxM",
+"https://www.youtube.com/embed/FI7bFx9wX4U",
+"https://www.youtube.com/embed/CIXtwd1Tyh8",
+"https://www.youtube.com/embed/FSXfxoTIm6k",
+"https://www.youtube.com/embed/st8Y5lB4BM0",
+
+      ],
+      cpp_language: [
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID1",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID2",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID4",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID5"
+      ]
+    };
+
+    let autoNext = false;
+
+    function loadVideo() {
+      const subject = document.getElementById("subjectSelect").value;
+      const chapter = parseInt(document.getElementById("chapterSelect").value);
+      const videoFrame = document.getElementById("videoFrame");
+      const videoUrl = videoLinks[subject][chapter];
+      videoFrame.src = videoUrl;
+
+      if (autoNext) {
+        setTimeout(() => {
+          nextEpisode();
+        }, 1000 * 60 * 5); // Auto next after 5 minutes (adjust as needed)
+      }
+    }
+
+    function nextEpisode() {
+      const chapterSelect = document.getElementById("chapterSelect");
+      let nextChapter = parseInt(chapterSelect.value) + 1;
+      if (nextChapter >= 5) nextChapter = 0;
+      chapterSelect.value = nextChapter;
+      loadVideo();
+    }
+
+    function toggleAutoNext() {
+      autoNext = !autoNext;
+      document.getElementById("autoStatus").innerText = autoNext ? "ON" : "OFF";
+    }
+  </script>
+</body>
+</html>
+
