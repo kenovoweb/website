@@ -20,212 +20,308 @@
       100% { background-position: 0% 50%; }
     }
 
+    iframe {
+      width: 90%;
+      height: 500px;
+      max-width: 960px;
+      margin: 2rem auto 1rem;
+      display: block;
+      border: 4px solid #00ffff;
+      border-radius: 10px;
+    }
+
     header {
       text-align: center;
-      padding: 2rem;
+      padding: 1rem 2rem;
       border-bottom: 2px solid #00ffff;
     }
 
     h1 {
       color: #00ffff;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
     }
 
     p.summary {
-      max-width: 700px;
+      max-width: 800px;
       margin: 0 auto;
       font-size: 1.1rem;
       color: #ccc;
     }
 
-    .course-section {
-      padding: 2rem;
+    .controls {
       text-align: center;
+      margin: 1rem 0;
     }
 
-    select {
+    select, button {
       margin: 0.5rem;
       padding: 0.6rem 1rem;
       border: none;
       border-radius: 5px;
       font-size: 1rem;
+    }
+
+    select {
       background-color: #333;
       color: #00ffff;
     }
 
+    button {
+      background-color: #00ffff;
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #00dddd;
+    }
+
     .lesson-buttons {
-      margin-top: 1rem;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
+      margin: 2rem;
     }
 
     .lesson-buttons button {
-      padding: 0.6rem 1rem;
-      border: none;
-      border-radius: 5px;
       background-color: #00ffff;
       color: #000;
-      font-size: 1rem;
+      padding: 0.6rem 1rem;
+      border-radius: 5px;
+      border: none;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background 0.3s;
     }
 
     .lesson-buttons button:hover {
       background-color: #00dddd;
     }
-
-    button.utility {
-      margin-top: 1rem;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 5px;
-      background-color: #00ffff;
-      color: #000;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    iframe {
-      width: 90%;
-      height: 500px;
-      max-width: 960px;
-      margin: 1rem auto;
-      display: block;
-      border: 4px solid #00ffff;
-      border-radius: 10px;
-    }
   </style>
 </head>
 <body>
 
+  <!-- Video Player -->
+  <iframe id="videoFrame" src="" allowfullscreen></iframe>
+
+  <!-- Header -->
   <header>
     <h1>Diploma in Information Technology (DIT)</h1>
     <p class="summary">
-      This 1-year offline course offers hands-on learning in key IT tools and programming languages. The syllabus includes:
-      <strong>MS Office</strong>, <strong>Tally</strong>, <strong>PageMaker</strong>, <strong>CorelDRAW</strong>, <strong>Photoshop</strong>, <strong>C Language</strong>, and <strong>C++ Language</strong>. Each subject is divided into multiple video chapters.
+      This 1-year offline course offers hands-on learning in key IT tools and programming languages. Topics include
+      <strong>MS Office</strong>, <strong>Tally</strong>, <strong>PageMaker</strong>, <strong>CorelDRAW</strong>,
+      <strong>Photoshop</strong>, <strong>C Language</strong>, and <strong>C++ Language</strong>. Each subject includes multiple video lessons.
     </p>
   </header>
 
-  <section class="course-section">
-    <h2>Select Subject</h2>
-    <div>
-      <select id="subjectSelect">
-        <option value="ms_office">MS Office</option>
-        <option value="tally">Tally</option>
-        <option value="pagemaker">PageMaker</option>
-        <option value="coreldraw">CorelDRAW</option>
-        <option value="photoshop">Photoshop</option>
-        <option value="c_language">C Language</option>
-        <option value="cpp_language">C++ Language</option>
-      </select>
-    </div>
+  <!-- Controls -->
+  <div class="controls">
+    <select id="subjectSelect">
+      <option value="ms_office">MS Office</option>
+      <option value="tally">Tally</option>
+      <option value="pagemaker">PageMaker</option>
+      <option value="coreldraw">CorelDRAW</option>
+      <option value="photoshop">Photoshop</option>
+      <option value="c_language">C Language</option>
+      <option value="cpp_language">C++ Language</option>
+    </select>
 
-    <div id="lessonButtons" class="lesson-buttons"></div>
+    <button onclick="toggleAutoNext()">Toggle Auto Next: <span id="autoStatus">OFF</span></button>
+  </div>
 
-    <button class="utility" onclick="toggleAutoNext()">Toggle Auto Next: <span id="autoStatus">OFF</span></button>
-
-    <iframe id="videoFrame" src="" allowfullscreen></iframe>
-  </section>
+  <!-- Lesson Buttons -->
+  <div id="lessonButtons" class="lesson-buttons"></div>
 
   <script>
     const videoLinks = {
       ms_office: [
         "https://www.youtube.com/embed/YOUR_VIDEO_ID1",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID2",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID4",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID5"
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID2"
       ],
       tally: [
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID1",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID2",
         "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID4",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID5"
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID4"
       ],
       pagemaker: [
-        "https://www.youtube.com/embed/ctJe7X9gsNg",
-        "https://www.youtube.com/embed/CWD792opAQ4",
-        "https://www.youtube.com/embed/IGR5iBFbGX4",
-        "https://www.youtube.com/embed/x-wm2aVeoLI",
-        "https://www.youtube.com/embed/Ue2LNRRvzqk"
+       "https://www.youtube.com/embed/ctJe7X9gsNg",
+"https://www.youtube.com/embed/CWD792opAQ4",
+"https://www.youtube.com/embed/IGR5iBFbGX4",
+"https://www.youtube.com/embed/x-wm2aVeoLI",
+"https://www.youtube.com/embed/Ue2LNRRvzqk",
+"https://www.youtube.com/embed/RZK_AfouZCc",
+"https://www.youtube.com/embed/R_yuLf4QgTY",
+"https://www.youtube.com/embed/2h-__O5Prj4",
+"https://www.youtube.com/embed/irgdsmFqDB8",
+"https://www.youtube.com/embed/tM4EAzKtmuk",
+"https://www.youtube.com/embed/WRKSclE3P7k",
+"https://www.youtube.com/embed/aWg3WJnpTB8",
+"https://www.youtube.com/embed/WjrIOntDNfQ",
+"https://www.youtube.com/embed/7gai5si0Hig"
       ],
       coreldraw: [
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID1",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID2",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID4",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID5"
+        "https://www.youtube.com/embed/ctJe7X9gsNg",
+"https://www.youtube.com/embed/CWD792opAQ4",
+"https://www.youtube.com/embed/IGR5iBFbGX4",
+"https://www.youtube.com/embed/x-wm2aVeoLI",
+"https://www.youtube.com/embed/Ue2LNRRvzqk",
+"https://www.youtube.com/embed/RZK_AfouZCc",
+"https://www.youtube.com/embed/R_yuLf4QgTY",
+"https://www.youtube.com/embed/2h-__O5Prj4",
+"https://www.youtube.com/embed/irgdsmFqDB8",
+"https://www.youtube.com/embed/tM4EAzKtmuk",
+"https://www.youtube.com/embed/WRKSclE3P7k",
+"https://www.youtube.com/embed/aWg3WJnpTB8",
+"https://www.youtube.com/embed/WjrIOntDNfQ",
+"https://www.youtube.com/embed/7gai5si0Hig"
       ],
       photoshop: [
         "https://www.youtube.com/embed/Mpf60TASj1A",
-        "https://www.youtube.com/embed/j29G7g6n0n8",
-        "https://www.youtube.com/embed/xJHW5kIanEo",
-        "https://www.youtube.com/embed/6K1af-i40z0",
-        "https://www.youtube.com/embed/OPBC59yNyuU"
+"https://www.youtube.com/embed/j29G7g6n0n8",
+"https://www.youtube.com/embed/xJHW5kIanEo",
+"https://www.youtube.com/embed/6K1af-i40z0",
+"https://www.youtube.com/embed/OPBC59yNyuU",
+"https://www.youtube.com/embed/Vnh3f2hom8Y",
+"https://www.youtube.com/embed/szth60ZTcbk",
+"https://www.youtube.com/embed/Og0d1yF00RQ",
+"https://www.youtube.com/embed/LQWiyAWU0vw",
+"https://www.youtube.com/embed/VJAqLUbZsN0",
+"https://www.youtube.com/embed/f5AtKgnw7eQ",
+"https://www.youtube.com/embed/GN94SMgMw84",
+"https://www.youtube.com/embed/MtfOEMw0VFk",
+"https://www.youtube.com/embed/3AE3yUjJhc4",
+"https://www.youtube.com/embed/TLxFetf0kNU",
+"https://www.youtube.com/embed/JkyNpRaDBMQ",
+"https://www.youtube.com/embed/j66uj2AV67U",
+"https://www.youtube.com/embed/PeN3OxoTW1s",
+"https://www.youtube.com/embed/vJDWeyJVacw",
+"https://www.youtube.com/embed/gUIvvC7b6gI",
+"https://www.youtube.com/embed/-mnFlgde4hU",
+"https://www.youtube.com/embed/eoiAFhc6Pzk",
+"https://www.youtube.com/embed/GWPPUY7dVDY",
+"https://www.youtube.com/embed/F90xbGZMRNo",
+"https://www.youtube.com/embed/RzpqhrPYp1M",
+"https://www.youtube.com/embed/hWHzpFG4JZ4"
       ],
       c_language: [
-        "https://www.youtube.com/embed/yNjIu9bgfus",
-        "https://www.youtube.com/embed/OL1Nu8CMU7Y",
-        "https://www.youtube.com/embed/7QwJlEVS6NE",
-        "https://www.youtube.com/embed/y8I6R1GyIR8",
-        "https://www.youtube.com/embed/WS0UA3QEsvw"
+       "https://www.youtube.com/embed/yNjIu9bgfus",
+"https://www.youtube.com/embed/OL1Nu8CMU7Y",
+"https://www.youtube.com/embed/7QwJlEVS6NE",
+"https://www.youtube.com/embed/y8I6R1GyIR8",
+"https://www.youtube.com/embed/WS0UA3QEsvw",
+"https://www.youtube.com/embed/tB9THbLuCtY",
+"https://www.youtube.com/embed/XZVd-ROchEE",
+"https://www.youtube.com/embed/VY6MBxsQtrE",
+"https://www.youtube.com/embed/JtOjoQ8PnEg",
+"https://www.youtube.com/embed/IdZ2vx6-2NI",
+"https://www.youtube.com/embed/s4Mk1BBK9qY",
+"https://www.youtube.com/embed/JR1tKogJ4Xw",
+"https://www.youtube.com/embed/ujRdLvmstKc",
+"https://www.youtube.com/embed/uUVTwkdTGh0",
+"https://www.youtube.com/embed/Y5YGUx8r2Dg",
+"https://www.youtube.com/embed/eWh-EC_DOJw",
+"https://www.youtube.com/embed/w7LzJSp7QZs",
+"https://www.youtube.com/embed/sLkn9smcANQ",
+"https://www.youtube.com/embed/wp-ipvdFkgI",
+"https://www.youtube.com/embed/A7ujVu2IA80",
+"https://www.youtube.com/embed/kmn7-S1aPuM",
+"https://www.youtube.com/embed/cgKYdoUMEYs",
+"https://www.youtube.com/embed/PIHwT2-wBc0",
+"https://www.youtube.com/embed/Snh9jBbNfZ4",
+"https://www.youtube.com/embed/B9X7je8VABI",
+"https://www.youtube.com/embed/HGO93hZH2pY",
+"https://www.youtube.com/embed/QeVHhi5RHXk",
+"https://www.youtube.com/embed/x3G85xyLywM",
+"https://www.youtube.com/embed/2U_6QUXt3cE",
+"https://www.youtube.com/embed/pyjmJybjJkQ",
+"https://www.youtube.com/embed/Ah0J6m8P_rQ",
+"https://www.youtube.com/embed/n4K-zEvlKLY",
+"https://www.youtube.com/embed/zeJ-Xt0CYlQ",
+"https://www.youtube.com/embed/1Cqb7QmlVHY",
+"https://www.youtube.com/embed/6ajli68ayxg",
+"https://www.youtube.com/embed/VqwJMpgdDxM",
+"https://www.youtube.com/embed/-1bZQkkBJAY",
+"https://www.youtube.com/embed/62Yt-jHv0DY",
+"https://www.youtube.com/embed/fyaFdHxfcy8",
+"https://www.youtube.com/embed/mDFsMQi3Ym0",
+"https://www.youtube.com/embed/tHS2bPe6ieA",
+"https://www.youtube.com/embed/TsPMYHkiF2o",
+"https://www.youtube.com/embed/4bEBM19m4rU",
+"https://www.youtube.com/embed/SGLSwetrrc8",
+"https://www.youtube.com/embed/ecZ5i9IXnl4",
+"https://www.youtube.com/embed/1KzMXA3tiQg",
+"https://www.youtube.com/embed/nBmScRDkmy0",
+"https://www.youtube.com/embed/yTA2xrHyiUU",
+"https://www.youtube.com/embed/mPAhq7zs0ZM",
+"https://www.youtube.com/embed/TiflfOnnU-4",
+"https://www.youtube.com/embed/XAD2iekjjxM",
+"https://www.youtube.com/embed/FI7bFx9wX4U",
+"https://www.youtube.com/embed/CIXtwd1Tyh8",
+"https://www.youtube.com/embed/FSXfxoTIm6k",
+"https://www.youtube.com/embed/st8Y5lB4BM0"
+
       ],
-      cpp_language: [
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID1",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID2",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID4",
-        "https://www.youtube.com/embed/YOUR_VIDEO_ID5"
+      c++_language: [
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID7",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID8"
       ]
     };
 
     let autoNext = false;
+    let currentSubject = "ms_office";
+    let currentLesson = 0;
 
-    const subjectSelect = document.getElementById("subjectSelect");
+    const videoFrame = document.getElementById("videoFrame");
     const lessonButtonsContainer = document.getElementById("lessonButtons");
+    const subjectSelect = document.getElementById("subjectSelect");
 
-    subjectSelect.addEventListener("change", generateLessonButtons);
+    subjectSelect.addEventListener("change", () => {
+      currentSubject = subjectSelect.value;
+      currentLesson = 0;
+      generateLessonButtons();
+    });
 
     function generateLessonButtons() {
-      const subject = subjectSelect.value;
-      const lessons = videoLinks[subject];
+      const lessons = videoLinks[currentSubject];
       lessonButtonsContainer.innerHTML = "";
 
-      lessons.forEach((link, index) => {
+      lessons.forEach((url, index) => {
         const button = document.createElement("button");
         button.textContent = `Lesson ${index + 1}`;
-        button.onclick = () => loadVideo(subject, index);
+        button.onclick = () => {
+          currentLesson = index;
+          loadVideo();
+        };
         lessonButtonsContainer.appendChild(button);
       });
+
+      loadVideo(); // Auto-load first lesson
     }
 
-    function loadVideo(subject, chapter) {
-      const videoFrame = document.getElementById("videoFrame");
-      videoFrame.src = videoLinks[subject][chapter];
+    function loadVideo() {
+      const videoURL = videoLinks[currentSubject][currentLesson];
+      videoFrame.src = videoURL;
 
       if (autoNext) {
         setTimeout(() => {
-          nextEpisode(subject, chapter);
-        }, 1000 * 60 * 5); // Auto next after 5 minutes
+          currentLesson++;
+          if (currentLesson >= videoLinks[currentSubject].length) {
+            currentLesson = 0;
+          }
+          loadVideo();
+        }, 1000 * 60 * 5); // 5 minutes
       }
-    }
-
-    function nextEpisode(subject, chapter) {
-      const lessons = videoLinks[subject];
-      const next = chapter + 1 >= lessons.length ? 0 : chapter + 1;
-      loadVideo(subject, next);
     }
 
     function toggleAutoNext() {
       autoNext = !autoNext;
-      document.getElementById("autoStatus").innerText = autoNext ? "ON" : "OFF";
+      document.getElementById("autoStatus").textContent = autoNext ? "ON" : "OFF";
     }
 
-    // Initialize buttons on load
-    window.onload = generateLessonButtons;
+    // Initial load
+    window.onload = () => {
+      generateLessonButtons();
+    };
   </script>
 
 </body>
