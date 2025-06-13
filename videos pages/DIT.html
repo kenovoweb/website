@@ -13,13 +13,11 @@
       animation: BackgroundShift 20s ease infinite;
       color: #fff;
     }
-
     @keyframes BackgroundShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     iframe {
       width: 90%;
       height: 500px;
@@ -29,30 +27,25 @@
       border: 4px solid #00ffff;
       border-radius: 10px;
     }
-
     header {
       text-align: center;
       padding: 1rem 2rem;
       border-bottom: 2px solid #00ffff;
     }
-
     h1 {
       color: #00ffff;
       margin-bottom: 0.5rem;
     }
-
     p.summary {
       max-width: 800px;
       margin: 0 auto;
       font-size: 1.1rem;
       color: #ccc;
     }
-
     .controls {
       text-align: center;
       margin: 1rem 0;
     }
-
     select, button {
       margin: 0.5rem;
       padding: 0.6rem 1rem;
@@ -60,43 +53,37 @@
       border-radius: 5px;
       font-size: 1rem;
     }
-
     select {
       background-color: #333;
       color: #00ffff;
     }
-
     button {
       background-color: #00ffff;
       color: #000;
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
     button:hover {
       background-color: #00dddd;
     }
-
-    .lesson-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin: 2rem;
+    /* Episode list */
+    #lessonButtons {
+      max-width: 960px;
+      margin: 1rem auto 2rem;
+      padding: 0;
+      list-style: none;
     }
-
-    .lesson-buttons button {
-      background-color: #00ffff;
-      color: #000;
-      padding: 0.6rem 1rem;
-      border-radius: 5px;
-      border: none;
+    #lessonButtons li {
+      margin: 0.5rem 0;
+      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
     }
-
-    .lesson-buttons button:hover {
-      background-color: #00dddd;
+    #lessonButtons li a {
+      color: #00ffff;
+      text-decoration: none;
+    }
+    #lessonButtons li:hover a {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -124,14 +111,14 @@
       <option value="coreldraw">CorelDRAW</option>
       <option value="photoshop">Photoshop</option>
       <option value="c_language">C Language</option>
-      <option value="cpp_language">C++ Language</option> <!-- FIXED KEY -->
+      <option value="cpp_language">C++ Language</option>
     </select>
-    <button onclick="generateLessonButtons()">Load Page</button>
+    <button onclick="generateLessonButtons()">Load Lessons</button>
     <button onclick="toggleAutoNext()">Toggle Auto Next: <span id="autoStatus">OFF</span></button>
   </div>
 
-  <!-- Lesson Buttons -->
-  <div id="lessonButtons" class="lesson-buttons"></div>
+  <!-- Episode List -->
+  <ul id="lessonButtons"></ul>
 
   <script>
     const videoLinks = {
@@ -198,41 +185,32 @@
     });
 
     function generateLessonButtons() {
-      const lessons = videoLinks[currentSubject];
-      if (!lessons) {
-        console.warn("No videos found for selected subject.");
-        return;
-      }
-
+      const lessons = videoLinks[currentSubject] || [];
       lessonButtonsContainer.innerHTML = "";
 
       lessons.forEach((url, index) => {
-        const button = document.createElement("button");
-        button.textContent = `Lesson ${index + 1}`;
-        button.onclick = () => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>Episode ${index + 1}:</strong>
+                        <a href="${url}" target="_blank">${url}</a>`;
+        li.onclick = () => {
           currentLesson = index;
           loadVideo();
         };
-        lessonButtonsContainer.appendChild(button);
+        lessonButtonsContainer.appendChild(li);
       });
 
-      loadVideo(); // Load first lesson
+      // Load the first video immediately
+      loadVideo();
     }
 
     function loadVideo() {
-      const videoURL = videoLinks[currentSubject][currentLesson];
-      if (videoURL) {
-        videoFrame.src = videoURL;
-      }
-
-      if (autoNext) {
+      const url = videoLinks[currentSubject][currentLesson];
+      videoFrame.src = url || "";
+      if (autoNext && url) {
         setTimeout(() => {
-          currentLesson++;
-          if (currentLesson >= videoLinks[currentSubject].length) {
-            currentLesson = 0;
-          }
+          currentLesson = (currentLesson + 1) % videoLinks[currentSubject].length;
           loadVideo();
-        }, 1000 * 60 * 5); // Auto Next after 5 mins
+        }, 1000 * 60 * 5); // every 5 minutes
       }
     }
 
@@ -241,9 +219,8 @@
       document.getElementById("autoStatus").textContent = autoNext ? "ON" : "OFF";
     }
 
-    window.onload = () => {
-      generateLessonButtons(); // Load on first visit
-    };
+    // Initialize on page load
+    window.onload = generateLessonButtons;
   </script>
 </body>
 </html>
