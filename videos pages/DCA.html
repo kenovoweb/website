@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIT Video Course Player</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
+      background-size: 600% 600%;
+      animation: BackgroundShift 20s ease infinite;
+      color: #fff;
+    }
+    @keyframes BackgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    iframe {
+      width: 90%;
+      height: 500px;
+      max-width: 960px;
+      margin: 2rem auto 1rem;
+      display: block;
+      border: 4px solid #00ffff;
+      border-radius: 10px;
+    }
+    header {
+      text-align: center;
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #00ffff;
+    }
+    h1 {
+      color: #00ffff;
+      margin-bottom: 0.5rem;
+    }
+    p.summary {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+    .controls {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    select, button {
+      margin: 0.5rem;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    select {
+      background-color: #333;
+      color: #00ffff;
+    }
+    button {
+      background-color: #00ffff;
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #00dddd;
+    }
+    /* Episode list */
+    #lessonButtons {
+      max-width: 960px;
+      margin: 1rem auto 2rem;
+      padding: 0;
+      list-style: none;
+    }
+    #lessonButtons li {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #lessonButtons li a {
+      color: #00ffff;
+      text-decoration: none;
+    }
+    #lessonButtons li:hover a {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video Player -->
+  <iframe id="videoFrame" src="" allowfullscreen></iframe>
+
+  <!-- Header -->
+  <header>
+    <h1>Diploma in Information Technology (DIT)</h1>
+    <p class="summary">
+      This 1-year offline course offers hands-on learning in key IT tools and programming languages. Topics include
+      <strong>MS Office</strong>, <strong>Tally</strong>, <strong>PageMaker</strong>, <strong>CorelDRAW</strong>,
+      <strong>Photoshop</strong>, <strong>C Language</strong>, and <strong>C++ Language</strong>.
+    </p>
+  </header>
+
+  <!-- Controls -->
+  <div class="controls">
+    <select id="subjectSelect">
+      <option value="ms_office">MS Office</option>
+      <option value="tally">Tally</option>
+      <option value="pagemaker">PageMaker</option>
+      <option value="coreldraw">CorelDRAW</option>
+      <option value="photoshop">Photoshop</option>
+      <option value="c_language">C Language</option>
+      <option value="cpp_language">C++ Language</option>
+    </select>
+    <button onclick="generateLessonButtons()">Load Lessons</button>
+    <button onclick="toggleAutoNext()">Toggle Auto Next: <span id="autoStatus">OFF</span></button>
+  </div>
+
+  <!-- Episode List -->
+  <ul id="lessonButtons"></ul>
+
+  <script>
+    const videoLinks = {
+      ms_office: ["https://www.youtube.com/embed/YOUR_VIDEO_ID1"],
+      tally: ["https://www.youtube.com/embed/YOUR_VIDEO_ID2"],
+      pagemaker: [
+        "https://www.youtube.com/embed/ctJe7X9gsNg",
+        "https://www.youtube.com/embed/CWD792opAQ4"
+      ],
+      coreldraw: [
+        "https://www.youtube.com/embed/x-wm2aVeoLI",
+        "https://www.youtube.com/embed/Ue2LNRRvzqk"
+      ],
+      photoshop: [
+       "https://www.youtube.com/embed/Mpf60TASj1A",
+"https://www.youtube.com/embed/j29G7g6n0n8",
+"https://www.youtube.com/embed/xJHW5kIanEo",
+"https://www.youtube.com/embed/6K1af-i40z0",
+"https://www.youtube.com/embed/OPBC59yNyuU",
+"https://www.youtube.com/embed/Vnh3f2hom8Y",
+"https://www.youtube.com/embed/szth60ZTcbk",
+"https://www.youtube.com/embed/Og0d1yF00RQ",
+"https://www.youtube.com/embed/LQWiyAWU0vw",
+"https://www.youtube.com/embed/VJAqLUbZsN0",
+"https://www.youtube.com/embed/f5AtKgnw7eQ",
+"https://www.youtube.com/embed/GN94SMgMw84",
+"https://www.youtube.com/embed/MtfOEMw0VFk",
+"https://www.youtube.com/embed/3AE3yUjJhc4",
+"https://www.youtube.com/embed/TLxFetf0kNU",
+"https://www.youtube.com/embed/JkyNpRaDBMQ",
+"https://www.youtube.com/embed/j66uj2AV67U",
+"https://www.youtube.com/embed/PeN3OxoTW1s",
+"https://www.youtube.com/embed/vJDWeyJVacw",
+"https://www.youtube.com/embed/gUIvvC7b6gI",
+"https://www.youtube.com/embed/-mnFlgde4hU",
+"https://www.youtube.com/embed/eoiAFhc6Pzk",
+"https://www.youtube.com/embed/GWPPUY7dVDY",
+"https://www.youtube.com/embed/F90xbGZMRNo",
+"https://www.youtube.com/embed/RzpqhrPYp1M",
+"https://www.youtube.com/embed/hWHzpFG4JZ4"
+      ],
+      c_language: [
+        "https://www.youtube.com/embed/yNjIu9bgfus",
+        "https://www.youtube.com/embed/OL1Nu8CMU7Y"
+      ],
+      cpp_language: [ // FIXED KEY HERE
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID3",
+        "https://www.youtube.com/embed/YOUR_VIDEO_ID4"
+      ]
+    };
+
+    let autoNext = false;
+    let currentSubject = "ms_office";
+    let currentLesson = 0;
+
+    const videoFrame = document.getElementById("videoFrame");
+    const lessonButtonsContainer = document.getElementById("lessonButtons");
+    const subjectSelect = document.getElementById("subjectSelect");
+
+    subjectSelect.addEventListener("change", () => {
+      currentSubject = subjectSelect.value;
+      currentLesson = 0;
+      generateLessonButtons();
+    });
+
+    function generateLessonButtons() {
+      const lessons = videoLinks[currentSubject] || [];
+      lessonButtonsContainer.innerHTML = "";
+
+      lessons.forEach((url, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>Episode ${index + 1}:</strong>
+                        <a href="${url}" target="_blank">${url}</a>`;
+        li.onclick = () => {
+          currentLesson = index;
+          loadVideo();
+        };
+        lessonButtonsContainer.appendChild(li);
+      });
+
+      // Load the first video immediately
+      loadVideo();
+    }
+
+    function loadVideo() {
+      const url = videoLinks[currentSubject][currentLesson];
+      videoFrame.src = url || "";
+      if (autoNext && url) {
+        setTimeout(() => {
+          currentLesson = (currentLesson + 1) % videoLinks[currentSubject].length;
+          loadVideo();
+        }, 1000 * 60 * 5); // every 5 minutes
+      }
+    }
+
+    function toggleAutoNext() {
+      autoNext = !autoNext;
+      document.getElementById("autoStatus").textContent = autoNext ? "ON" : "OFF";
+    }
+
+    // Initialize on page load
+    window.onload = generateLessonButtons;
+  </script>
+</body>
+</html>
