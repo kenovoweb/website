@@ -7,20 +7,20 @@
   <meta name="keywords" content="computer courses, DIT, DCA, DMA, ADCA, DWD" />
   <meta name="author" content="Computer Learning Class" />
   <title>Computer Learning Class</title>
-  <link rel="icon" type="image/jpg" href="photos/72e19696-c7e8-4747-8f23-fd5c94502f4e.jpg" />
+  <link rel="icon" type="image/png" href="photos/logo-transparent.png" />
 
   <style>
     :root {
       --bg: #ffffff;
       --text: #000;
-      --header: #003366;
+      --header-bg: rgba(0, 51, 102, 0.8); /* semi‑transparent header overlay */
       --nav: #002244;
       --accent: #004080;
     }
     body.dark {
       --bg: #1e1e1e;
       --text: #f0f0f0;
-      --header: #1a1a1a;
+      --header-bg: rgba(26, 26, 26, 0.8);
       --nav: #111;
       --accent: #444;
     }
@@ -30,14 +30,19 @@
       background-color: var(--bg);
       color: var(--text);
     }
+
+    /* Header */
     header {
-      background-color: var(--header);
+      background-color: var(--header-bg);
       color: white;
       padding: 20px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     .logo-title {
       display: flex;
@@ -46,7 +51,10 @@
     }
     .logo-title img {
       height: 50px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
     }
+
+    /* Search & theme toggle */
     .search-theme {
       display: flex;
       flex-direction: column;
@@ -67,6 +75,8 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
+    /* Navigation */
     nav {
       background-color: var(--nav);
       padding: 10px;
@@ -82,11 +92,15 @@
       text-decoration: underline;
     }
 
+    /* Main content */
     .container {
       padding: 20px;
     }
+    h2 {
+      margin-top: 1.5em;
+    }
 
-    /* fixed-size course card */
+    /* Course cards */
     .course {
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -97,22 +111,19 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 15px;
-      min-height: 180px;          /* ensure enough height */
+      min-height: 180px;
     }
-
-    /* fixed-size frame for images */
     .course img {
       width: 150px;
       height: 150px;
-      object-fit: contain;        /* scale images to fit */
-      border: 1px solid #ddd;     /* optional visual frame */
+      object-fit: contain;
+      border: 1px solid #ddd;
       border-radius: 4px;
       background-color: white;
     }
-
     .course-title {
       font-size: 20px;
-      color: var(--header);
+      color: var(--nav);
       margin: 0 0 8px;
     }
     .price {
@@ -125,7 +136,7 @@
       margin-top: 10px;
     }
     .buttons button {
-      background-color: var(--header);
+      background-color: var(--nav);
       color: white;
       border: none;
       padding: 6px 10px;
@@ -136,6 +147,7 @@
       background-color: #001a33;
     }
 
+    /* Review slider */
     .review-slider {
       overflow: hidden;
       max-width: 800px;
@@ -161,8 +173,9 @@
       100% { transform: translateX(-400%); }
     }
 
+    /* Footer */
     footer {
-      background-color: var(--header);
+      background-color: var(--nav);
       color: white;
       text-align: center;
       padding: 20px;
@@ -177,6 +190,7 @@
       display: inline-block;
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -195,29 +209,33 @@
 
   <script>
     function toggleDescription(id) {
-      const d = document.getElementById('desc-' + id);
-      const b = document.getElementById('btn-' + id);
-      if (!d.style.display || d.style.display === 'none') {
-        d.style.display = 'block'; b.innerText = 'Show Less';
+      const desc = document.getElementById('desc-' + id);
+      const btn  = document.getElementById('btn-' + id);
+      if (!desc.style.display || desc.style.display === 'none') {
+        desc.style.display = 'block';
+        btn.innerText   = 'Show Less';
       } else {
-        d.style.display = 'none';  b.innerText = 'Show More';
+        desc.style.display = 'none';
+        btn.innerText   = 'Show More';
       }
     }
+
     document.addEventListener("DOMContentLoaded", () => {
       const searchInput = document.querySelector(".search-bar input");
-      const courses = document.querySelectorAll(".course");
-      const toggle = document.getElementById("theme-toggle");
+      const courses     = document.querySelectorAll(".course");
+      const toggleBtn   = document.getElementById("theme-toggle");
 
       searchInput.addEventListener("input", () => {
         const q = searchInput.value.toLowerCase();
         courses.forEach(c => {
-          const t = c.querySelector(".course-title").innerText.toLowerCase();
-          c.style.display = t.includes(q) ? "flex" : "none";
+          const title = c.querySelector(".course-title").innerText.toLowerCase();
+          c.style.display = title.includes(q) ? "flex" : "none";
         });
       });
-      toggle.addEventListener("click", () => {
+
+      toggleBtn.addEventListener("click", () => {
         document.body.classList.toggle("dark");
-        toggle.textContent = document.body.classList.contains("dark")
+        toggleBtn.textContent = document.body.classList.contains("dark")
           ? "Switch to Light Mode"
           : "Switch to Dark Mode";
       });
@@ -228,11 +246,13 @@
 
   <header>
     <div class="logo-title">
-      <img src="photos/72e19696-c7e8-4747-8f23-fd5c94502f4e.jpg" alt="Logo" />
+      <img src="photos/logo-transparent.png" alt="Computer Learning Class Logo" />
       <h1>Computer Learning Class</h1>
     </div>
     <div class="search-theme">
-      <div class="search-bar"><input type="text" placeholder="Search courses…" /></div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search courses..." />
+      </div>
       <button id="theme-toggle">Switch to Dark Mode</button>
     </div>
   </header>
@@ -245,6 +265,7 @@
 
   <div class="container">
     <p><strong>Welcome to Computer Learning Class –</strong> your trusted destination for high‑quality computer education.</p>
+
     <h2>About Us</h2>
     <p>We offer certified diploma programs in Information Technology, Computer Applications, Multimedia & Animation, and Web Design. Our mission is to make digital skills accessible to everyone, completely free of charge.</p>
 
@@ -252,66 +273,76 @@
 
     <!-- DIT -->
     <div class="course">
-      <img src="photos/dit_small_banner-2.jpg" alt="DIT – Diploma in Information Technology" />
+      <img src="photos/dit_small_banner-2.png" alt="DIT – Diploma in Information Technology" />
       <div>
         <h3 class="course-title"><a href="videos pages/DIT.html">DIT – Diploma in Information Technology</a></h3>
         <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-dit" class="description">
           <p>This diploma builds a strong foundation in IT basics, hardware, software, networking, and more.</p>
         </div>
-        <div class="buttons"><button onclick="toggleDescription('dit')" id="btn-dit">Show More</button></div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dit')" id="btn-dit">Show More</button>
+        </div>
       </div>
     </div>
 
     <!-- ADCA -->
     <div class="course">
-      <img src="photos/adca.jpg" alt="ADCA – Advanced Diploma in Computer Applications" />
+      <img src="photos/adca.png" alt="ADCA – Advanced Diploma in Computer Applications" />
       <div>
         <h3 class="course-title"><a href="videos pages/ADCA.html">ADCA – Advanced Diploma in Computer Applications</a></h3>
         <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-adca" class="description">
           <p>Master advanced office tools, database management, and web applications in this course.</p>
         </div>
-        <div class="buttons"><button onclick="toggleDescription('adca')" id="btn-adca">Show More</button></div>
+        <div class="buttons">
+          <button onclick="toggleDescription('adca')" id="btn-adca">Show More</button>
+        </div>
       </div>
     </div>
 
     <!-- DCA -->
     <div class="course">
-      <img src="photos/dca.jpg" alt="DCA – Diploma in Computer Applications" />
+      <img src="photos/dca.png" alt="DCA – Diploma in Computer Applications" />
       <div>
         <h3 class="course-title"><a href="videos pages/DCA.html">DCA – Diploma in Computer Applications</a></h3>
         <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-dca" class="description">
           <p>Introductory course covering basic computer skills, MS Office, and internet tools.</p>
         </div>
-        <div class="buttons"><button onclick="toggleDescription('dca')" id="btn-dca">Show More</button></div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dca')" id="btn-dca">Show More</button>
+        </div>
       </div>
     </div>
 
     <!-- DMA -->
     <div class="course">
-      <img src="photos/dma.jpg" alt="DMA – Diploma in Multimedia & Animation" />
+      <img src="photos/dma.png" alt="DMA – Diploma in Multimedia & Animation" />
       <div>
         <h3 class="course-title"><a href="videos pages/DMA.html">DMA – Diploma in Multimedia & Animation</a></h3>
         <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-dma" class="description">
           <p>Learn animation, graphics, 3D modeling, and motion video editing in this creative course.</p>
         </div>
-        <div class="buttons"><button onclick="toggleDescription('dma')" id="btn-dma">Show More</button></div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dma')" id="btn-dma">Show More</button>
+        </div>
       </div>
     </div>
 
     <!-- DWD -->
     <div class="course">
-      <img src="photos/dwd.jpg" alt="DWD – Diploma in Web Designing" />
+      <img src="photos/dwd.png" alt="DWD – Diploma in Web Designing" />
       <div>
         <h3 class="course-title"><a href="videos pages/DWD.html">DWD – Diploma in Web Designing</a></h3>
         <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-dwd" class="description">
           <p>Master HTML, CSS, JavaScript, and build responsive websites and portfolios.</p>
         </div>
-        <div class="buttons"><button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button></div>
+        <div class="buttons">
+          <button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button>
+        </div>
       </div>
     </div>
 
