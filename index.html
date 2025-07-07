@@ -17,7 +17,6 @@
       --nav: #002244;
       --accent: #004080;
     }
-
     body.dark {
       --bg: #1e1e1e;
       --text: #f0f0f0;
@@ -25,14 +24,12 @@
       --nav: #111;
       --accent: #444;
     }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
     }
-
     header {
       background-color: var(--header);
       color: white;
@@ -42,31 +39,26 @@
       flex-wrap: wrap;
       align-items: center;
     }
-
     .logo-title {
       display: flex;
       align-items: center;
       gap: 15px;
     }
-
     .logo-title img {
       height: 50px;
     }
-
     .search-theme {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       gap: 10px;
     }
-
     .search-bar input {
       padding: 7px;
       border: none;
       border-radius: 4px;
       width: 200px;
     }
-
     #theme-toggle {
       padding: 6px 12px;
       background-color: var(--accent);
@@ -75,20 +67,17 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     nav {
       background-color: var(--nav);
       padding: 10px;
       text-align: center;
     }
-
     nav a {
       color: white;
       margin: 0 10px;
       text-decoration: none;
       font-weight: bold;
     }
-
     nav a:hover {
       text-decoration: underline;
     }
@@ -97,6 +86,7 @@
       padding: 20px;
     }
 
+    /* fixed-size course card */
     .course {
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -105,34 +95,35 @@
       background-color: #f9f9f9;
       display: flex;
       flex-wrap: wrap;
-      align-items: flex-start;
+      align-items: center;
       gap: 15px;
+      min-height: 180px;          /* ensure enough height */
     }
 
+    /* fixed-size frame for images */
     .course img {
-      /* allow full, natural size */
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      object-fit: none;
+      width: 150px;
+      height: 150px;
+      object-fit: contain;        /* scale images to fit */
+      border: 1px solid #ddd;     /* optional visual frame */
+      border-radius: 4px;
+      background-color: white;
     }
 
     .course-title {
       font-size: 20px;
       color: var(--header);
-      margin: 0;
+      margin: 0 0 8px;
     }
-
     .price {
       color: green;
       font-weight: bold;
+      margin-bottom: 8px;
     }
-
     .description {
       display: none;
       margin-top: 10px;
     }
-
     .buttons button {
       background-color: var(--header);
       color: white;
@@ -141,7 +132,6 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     .buttons button:hover {
       background-color: #001a33;
     }
@@ -154,13 +144,11 @@
       border-radius: 10px;
       padding: 15px;
     }
-
     .review-track {
       display: flex;
       width: max-content;
       animation: scroll 20s linear infinite;
     }
-
     .review {
       min-width: 100%;
       flex-shrink: 0;
@@ -168,9 +156,8 @@
       font-style: italic;
       color: #333;
     }
-
     @keyframes scroll {
-      0% { transform: translateX(0); }
+      0%   { transform: translateX(0); }
       100% { transform: translateX(-400%); }
     }
 
@@ -180,7 +167,6 @@
       text-align: center;
       padding: 20px;
     }
-
     .footer-buttons a {
       background-color: var(--accent);
       color: white;
@@ -196,12 +182,11 @@
         flex-direction: column;
         align-items: flex-start;
       }
-
       .course {
         flex-direction: column;
         align-items: flex-start;
+        min-height: auto;
       }
-
       .search-theme {
         align-items: flex-start;
       }
@@ -210,30 +195,26 @@
 
   <script>
     function toggleDescription(id) {
-      const desc = document.getElementById('desc-' + id);
-      const btn = document.getElementById('btn-' + id);
-      if (desc.style.display === 'none' || desc.style.display === '') {
-        desc.style.display = 'block';
-        btn.innerText = 'Show Less';
+      const d = document.getElementById('desc-' + id);
+      const b = document.getElementById('btn-' + id);
+      if (!d.style.display || d.style.display === 'none') {
+        d.style.display = 'block'; b.innerText = 'Show Less';
       } else {
-        desc.style.display = 'none';
-        btn.innerText = 'Show More';
+        d.style.display = 'none';  b.innerText = 'Show More';
       }
     }
-
     document.addEventListener("DOMContentLoaded", () => {
       const searchInput = document.querySelector(".search-bar input");
       const courses = document.querySelectorAll(".course");
       const toggle = document.getElementById("theme-toggle");
 
       searchInput.addEventListener("input", () => {
-        const query = searchInput.value.toLowerCase();
-        courses.forEach(course => {
-          const title = course.querySelector(".course-title").innerText.toLowerCase();
-          course.style.display = title.includes(query) ? "flex" : "none";
+        const q = searchInput.value.toLowerCase();
+        courses.forEach(c => {
+          const t = c.querySelector(".course-title").innerText.toLowerCase();
+          c.style.display = t.includes(q) ? "flex" : "none";
         });
       });
-
       toggle.addEventListener("click", () => {
         document.body.classList.toggle("dark");
         toggle.textContent = document.body.classList.contains("dark")
@@ -251,9 +232,7 @@
       <h1>Computer Learning Class</h1>
     </div>
     <div class="search-theme">
-      <div class="search-bar">
-        <input type="text" placeholder="Search courses..." />
-      </div>
+      <div class="search-bar"><input type="text" placeholder="Search courses…" /></div>
       <button id="theme-toggle">Switch to Dark Mode</button>
     </div>
   </header>
@@ -265,85 +244,74 @@
   </nav>
 
   <div class="container">
-    <p><strong>Welcome to Computer Learning Class –</strong> your trusted destination for high-quality computer education.</p>
-
+    <p><strong>Welcome to Computer Learning Class –</strong> your trusted destination for high‑quality computer education.</p>
     <h2>About Us</h2>
-    <p>We offer certified diploma programs in Information Technology, Computer Applications, Multimedia & Animation, and Web Design. Our mission is to make digital skills accessible to everyone, helping learners gain real-world knowledge, completely free of charge.</p>
+    <p>We offer certified diploma programs in Information Technology, Computer Applications, Multimedia & Animation, and Web Design. Our mission is to make digital skills accessible to everyone, completely free of charge.</p>
 
     <h2>Our Courses</h2>
 
     <!-- DIT -->
     <div class="course">
-      <img src="photos/dit_small_banner-2.jpg" alt="DIT - Diploma in Information Technology" />
+      <img src="photos/dit_small_banner-2.jpg" alt="DIT – Diploma in Information Technology" />
       <div>
-        <h3 class="course-title"><a href="videos pages/DIT.html">DIT - Diploma in Information Technology</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
+        <h3 class="course-title"><a href="videos pages/DIT.html">DIT – Diploma in Information Technology</a></h3>
+        <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-dit" class="description">
           <p>This diploma builds a strong foundation in IT basics, hardware, software, networking, and more.</p>
         </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('dit')" id="btn-dit">Show More</button>
-        </div>
+        <div class="buttons"><button onclick="toggleDescription('dit')" id="btn-dit">Show More</button></div>
       </div>
     </div>
 
     <!-- ADCA -->
     <div class="course">
-      <img src="photos/adca.jpg" alt="ADCA - Advanced Diploma in Computer Applications" />
+      <img src="photos/adca.jpg" alt="ADCA – Advanced Diploma in Computer Applications" />
       <div>
-        <h3 class="course-title"><a href="videos pages/ADCA.html">ADCA - Advanced Diploma in Computer Applications</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
+        <h3 class="course-title"><a href="videos pages/ADCA.html">ADCA – Advanced Diploma in Computer Applications</a></h3>
+        <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-adca" class="description">
           <p>Master advanced office tools, database management, and web applications in this course.</p>
         </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('adca')" id="btn-adca">Show More</button>
-        </div>
+        <div class="buttons"><button onclick="toggleDescription('adca')" id="btn-adca">Show More</button></div>
       </div>
     </div>
 
     <!-- DCA -->
     <div class="course">
-      <img src="photos/dca.jpg" alt="DCA - Diploma in Computer Applications" />
+      <img src="photos/dca.jpg" alt="DCA – Diploma in Computer Applications" />
       <div>
-        <h3 class="course-title"><a href="videos pages/DCA.html">DCA - Diploma in Computer Applications</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
+        <h3 class="course-title"><a href="videos pages/DCA.html">DCA – Diploma in Computer Applications</a></h3>
+        <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-dca" class="description">
           <p>Introductory course covering basic computer skills, MS Office, and internet tools.</p>
         </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('dca')" id="btn-dca">Show More</button>
-        </div>
+        <div class="buttons"><button onclick="toggleDescription('dca')" id="btn-dca">Show More</button></div>
       </div>
     </div>
 
     <!-- DMA -->
     <div class="course">
-      <img src="photos/dma.jpg" alt="DMA - Diploma in Multimedia & Animation" />
+      <img src="photos/dma.jpg" alt="DMA – Diploma in Multimedia & Animation" />
       <div>
-        <h3 class="course-title"><a href="videos pages/DMA.html">DMA - Diploma in Multimedia & Animation</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
+        <h3 class="course-title"><a href="videos pages/DMA.html">DMA – Diploma in Multimedia & Animation</a></h3>
+        <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-dma" class="description">
           <p>Learn animation, graphics, 3D modeling, and motion video editing in this creative course.</p>
         </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('dma')" id="btn-dma">Show More</button>
-        </div>
+        <div class="buttons"><button onclick="toggleDescription('dma')" id="btn-dma">Show More</button></div>
       </div>
     </div>
 
     <!-- DWD -->
     <div class="course">
-      <img src="photos/dwd.jpg" alt="DWD - Diploma in Web Designing" />
+      <img src="photos/dwd.jpg" alt="DWD – Diploma in Web Designing" />
       <div>
-        <h3 class="course-title"><a href="videos pages/DWD.html">DWD - Diploma in Web Designing</a></h3>
-        <p class="price">Free - ₹0.00 INR</p>
+        <h3 class="course-title"><a href="videos pages/DWD.html">DWD – Diploma in Web Designing</a></h3>
+        <p class="price">Free – ₹0.00 INR</p>
         <div id="desc-dwd" class="description">
           <p>Master HTML, CSS, JavaScript, and build responsive websites and portfolios.</p>
         </div>
-        <div class="buttons">
-          <button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button>
-        </div>
+        <div class="buttons"><button onclick="toggleDescription('dwd')" id="btn-dwd">Show More</button></div>
       </div>
     </div>
 
